@@ -27,28 +27,27 @@ class Item extends StatelessWidget {
           borderRadius: BorderRadius.circular(11.0),
           image: DecorationImage(
             image: NetworkImage(anime.images!.jpg.url),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
         ),
         child: Column(children: [
           Container(height: MediaQuery.sizeOf(context).height * 0.01),
-          Container(
-            color: Color.fromRGBO(15, 15, 15, 0.5),
-            child: Column(
-              children: [
-                Text(
-                  textAlign: TextAlign.center,
-                  anime.title.toString(),
-                  style: const TextStyle(color: Colors.white),
+          Row(
+            children: [
+              Expanded(child: SizedBox()),
+              Expanded(child: SizedBox()),
+              Expanded(
+                child: CircleAvatar(
+                  backgroundColor: Colors.red,
+                  radius: 20,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    
+                    child: Text(anime.score.toString())),
                 ),
-                Text(
-                  textAlign: TextAlign.center,
-                  anime.score.toString(),
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
+              ),
+            ],
+          )
         ]),
       ),
     );
