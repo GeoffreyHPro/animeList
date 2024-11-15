@@ -13,16 +13,22 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.sizeOf(context).height * 0.2,
       decoration: BoxDecoration(
           color: Colors.black, borderRadius: BorderRadius.circular(15)),
-      padding: const EdgeInsets.fromLTRB(0, 20, 10, 10),
       child: Row(children: [
-        Expanded(
-            child: InkWell(
-                onTap: () {
-                  BlocProvider.of<FavAnimeCubit>(context).detail(anime);
-                },
-                child: Image.file(height: 150, File(anime.image!)))),
+        InkWell(
+            onTap: () {
+              BlocProvider.of<FavAnimeCubit>(context).detail(anime);
+            },
+            child:
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.file(File(anime.image!)
+              )
+             
+            ,)
+        ),
         Expanded(
             child: Center(
           child: Column(

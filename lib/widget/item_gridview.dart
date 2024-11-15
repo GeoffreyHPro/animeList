@@ -41,9 +41,8 @@ class Item extends StatelessWidget {
                   backgroundColor: Colors.red,
                   radius: 20,
                   child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    
-                    child: Text(anime.score.toString())),
+                      backgroundColor: Colors.white,
+                      child: Text(anime.score.toString())),
                 ),
               ),
             ],
