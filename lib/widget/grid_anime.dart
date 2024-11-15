@@ -13,16 +13,18 @@ class GridAnime extends StatelessWidget {
       if (listAnime.isEmpty) {
         return const Center(child: Text("Aucun résultat avec ce filtre"));
       } else {
-        return GridView.count(
-            padding: const EdgeInsets.fromLTRB(2, 10, 2, 10),
-            mainAxisSpacing: 10,
-            crossAxisCount: 3,
-            children: List.generate(listAnime.length, (index) {
-              return Center(
-                  child: Item(
-                anime: listAnime[index],
-              ));
-            }));
+        return Container(
+          child: GridView.count(
+              padding: const EdgeInsets.fromLTRB(2, 10, 2, 10),
+              mainAxisSpacing: 10,
+              crossAxisCount: 2,
+              children: List.generate(listAnime.length, (index) {
+                return Center(
+                    child: Item(
+                  anime: listAnime[index],
+                ));
+              })),
+        );
       }
     }
 
