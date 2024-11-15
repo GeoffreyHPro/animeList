@@ -8,47 +8,48 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.sizeOf(context).width * 0.28,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.black),
-      child: Column(
-        children: [
-          Expanded(
-            child: IconButton(
-                onPressed: () async {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AnimeDetail(
-                          anime: anime,
-                          list: const [],
-                        ),
-                      ));
-                },
-                icon: Container(
-                  width: MediaQuery.sizeOf(context).width * 0.40,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2),
-                  ),
-                  child: Image.network(fit: BoxFit.fill, anime.images!.jpg.url),
-                )),
+    return IconButton(
+      onPressed: () async {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AnimeDetail(
+                anime: anime,
+                list: const [],
+              ),
+            ));
+      },
+      icon: Container(
+        width: MediaQuery.sizeOf(context).width * 0.40,
+        height: MediaQuery.sizeOf(context).height * 0.40,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(11.0),
+          image: DecorationImage(
+            image: NetworkImage(anime.images!.jpg.url),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: Column(children: [
+          Container(height: MediaQuery.sizeOf(context).height * 0.01),
           Container(
-            padding: const EdgeInsets.fromLTRB(3, 0, 3, 2),
-            child: Text(anime.title.toString(),
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white),
-                maxLines: 1),
+            color: Color.fromRGBO(15, 15, 15, 0.5),
+            child: Column(
+              children: [
+                Text(
+                  textAlign: TextAlign.center,
+                  anime.title.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+                Text(
+                  textAlign: TextAlign.center,
+                  anime.score.toString(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
           ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(3, 0, 3, 2),
-            child: Text(anime.score.toString(),
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white),
-                maxLines: 1),
-          ),
-        ],
+        ]),
       ),
     );
   }
