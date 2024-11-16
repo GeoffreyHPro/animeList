@@ -22,7 +22,9 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
 
   Widget getName() {
     if (widget.anime.title != null) {
-      return Text(widget.anime.title!);
+      return Text(widget.anime.title!,
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18));
     } else {
       return const Text("no name");
     }
@@ -30,7 +32,8 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
 
   Widget getScore() {
     if (widget.anime.score != null) {
-      return Text(widget.anime.score!.toString());
+      return Text(widget.anime.score!.toString(),
+          style: TextStyle(color: Colors.white));
     } else {
       return const Text("no score");
     }
@@ -38,7 +41,8 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
 
   Widget getYear() {
     if (widget.anime.year != null) {
-      return Text(widget.anime.year!.toString());
+      return Text(widget.anime.year!.toString(),
+          style: TextStyle(color: Colors.white));
     } else {
       return const Text("no year");
     }
@@ -96,52 +100,61 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
                 fit: BoxFit.fill)),
         child: SingleChildScrollView(
           child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(35.0),
-              child: Container(
-                color: const Color.fromRGBO(10, 10, 10, 0.4),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Column(
-                            children: [getName(), getScore(), getYear()],
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.60,
-                        child: getDescription()),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    SizedBox(
+            child: Container(
+              color: const Color.fromRGBO(10, 10, 10, 0.8),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            getName(),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  SizedBox(
                       width: MediaQuery.sizeOf(context).width * 0.60,
-                      child: TextFormField(
-                        maxLines: null,
-                        initialValue: widget.anime.annotation,
-                        keyboardType: TextInputType.multiline,
-                        onChanged: (value) {
-                          annotation = value.toString();
-                        },
-                      ),
+                      child: getDescription()),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width * 0.60,
+                    child: TextFormField(
+                      style: TextStyle(color: Colors.white),
+                      maxLines: null,
+                      initialValue: widget.anime.annotation,
+                      keyboardType: TextInputType.multiline,
+                      onChanged: (value) {
+                        annotation = value.toString();
+                      },
                     ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    ElevatedButton(
-                        onPressed: () async {
-                          await updateAnnotation(globals.database, annotation,
-                              widget.anime.title!);
-                        },
-                        child: const Text("sauvegarder"))
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await updateAnnotation(
+                          globals.database, annotation, widget.anime.title!);
+                    },
+                    child: const Text("sauvegarder"),
+                    style:
+                        ElevatedButton.styleFrom(foregroundColor: Colors.black),
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                ],
               ),
             ),
           ),
