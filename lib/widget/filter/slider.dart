@@ -13,7 +13,7 @@ class SliderWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         RangeSlider(
-          activeColor: Colors.grey.shade800,
+          activeColor: Colors.grey.shade900,
           values: currentValue,
           max: 10,
           divisions: 10,

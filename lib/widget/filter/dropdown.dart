@@ -4,7 +4,13 @@ class DropDownWidget extends StatelessWidget {
   DropDownWidget({super.key, required this.fct});
   final dynamic fct;
 
-  final List<String> listTri = ["aucun", "desc_title", "asc_title", "desc_score","asc_score"];
+  final List<String> listTri = [
+    "none",
+    "desc_title",
+    "asc_title",
+    "desc_score",
+    "asc_score"
+  ];
 
   @override
   Widget build(BuildContext context) {
