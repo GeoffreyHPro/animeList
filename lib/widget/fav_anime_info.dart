@@ -46,7 +46,8 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
 
   Widget getDescription() {
     if (widget.anime.synopsis != null) {
-      return Text(widget.anime.synopsis!.toString());
+      return Text(widget.anime.synopsis!.toString(),
+          style: TextStyle(color: Colors.white));
     } else {
       return const Text("no description");
     }
@@ -88,51 +89,60 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
               )
             ],
           )),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(35.0),
-            child: Column(
-              children: [
-                Row(
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: Image.file(File(widget.anime.image!)).image,
+                fit: BoxFit.fill)),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(35.0),
+              child: Container(
+                color: const Color.fromRGBO(10, 10, 10, 0.4),
+                child: Column(
                   children: [
-                    Expanded(
-                        child:
-                            Image.file(height: 150, File(widget.anime.image!))),
-                    Expanded(
-                      child: Column(
-                        children: [getName(), getScore(), getYear()],
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [getName(), getScore(), getYear()],
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    SizedBox(
+                        width: MediaQuery.sizeOf(context).width * 0.60,
+                        child: getDescription()),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.60,
+                      child: TextFormField(
+                        maxLines: null,
+                        initialValue: widget.anime.annotation,
+                        keyboardType: TextInputType.multiline,
+                        onChanged: (value) {
+                          annotation = value.toString();
+                        },
                       ),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    ElevatedButton(
+                        onPressed: () async {
+                          await updateAnnotation(globals.database, annotation,
+                              widget.anime.title!);
+                        },
+                        child: const Text("sauvegarder"))
                   ],
                 ),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                    width: MediaQuery.sizeOf(context).width * 0.60,
-                    child: getDescription()),
-                const SizedBox(
-                  height: 25,
-                ),
-                SizedBox(
-                  width: MediaQuery.sizeOf(context).width * 0.60,
-                  child: TextFormField(
-                    maxLines: null,
-                    initialValue: widget.anime.annotation,
-                    keyboardType: TextInputType.multiline,
-                    onChanged: (value) {
-                      annotation = value.toString();
-                    },
-                  ),
-                ),
-                ElevatedButton(
-                    onPressed: () async {
-                      await updateAnnotation(
-                          globals.database, annotation, widget.anime.title!);
-                    },
-                    child: const Text("sauvegarder"))
-              ],
+              ),
             ),
           ),
         ),

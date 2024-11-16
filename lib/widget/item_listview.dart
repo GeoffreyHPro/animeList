@@ -30,10 +30,15 @@ class Item extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(anime.title!, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+              Text(anime.title!,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15)),
               Text("${anime.score}",
                   style: const TextStyle(color: Colors.white)),
-              Text(anime.year.toString(), style: const TextStyle(color: Colors.white)),
+              Text(anime.year.toString(),
+                  style: const TextStyle(color: Colors.white)),
             ],
           ),
         )),
