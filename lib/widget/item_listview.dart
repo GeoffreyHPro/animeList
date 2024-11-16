@@ -13,7 +13,7 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.2,
+      height: MediaQuery.sizeOf(context).height * 0.175,
       decoration: BoxDecoration(
           color: Colors.black, borderRadius: BorderRadius.circular(15)),
       child: Row(children: [
