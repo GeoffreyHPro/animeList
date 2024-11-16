@@ -15,10 +15,10 @@ Future<Response> getAnimeFilter(Filter filter) {
 Future<Response> getAnimeFilterPage(Filter filter, int page) {
   List<String> order = filter.order.split('_');
   String request = "https://api.jikan.moe/v4/anime?q=${filter.name}&min_score=${filter.scoreMin}&max_score=${filter.scoreMax}&page=$page";
-  if(filter.order != "aucun"){
+  if(filter.order != "none"){
     request += "&sort=${order[0]}&order_by=${order[1]}";
   }
-  if (filter.type != "" && filter.type != "tous") {
+  if (filter.type != "" && filter.type != "all") {
     request += "&type=${filter.type}";
   }
   return dio.get(request);
