@@ -89,6 +89,12 @@ class _FilterView extends State<FilterView> {
           FilterItem(
               title: "Name of Anime",
               content: TextField(
+                cursorColor: Colors.black,
+                decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black))),
                 onChanged: (value) {
                   name = value.toString();
                 },

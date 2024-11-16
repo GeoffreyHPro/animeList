@@ -13,6 +13,7 @@ class CheckBoxWidget extends StatelessWidget {
       children: List.generate(
         valuesList.length,
         (index) => CheckboxListTile(
+          activeColor: Colors.black,
           controlAffinity: ListTileControlAffinity.leading,
           contentPadding: EdgeInsets.zero,
           dense: true,
