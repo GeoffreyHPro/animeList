@@ -21,21 +21,19 @@ class Item extends StatelessWidget {
             onTap: () {
               BlocProvider.of<FavAnimeCubit>(context).detail(anime);
             },
-            child:
-            ClipRRect(
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.file(File(anime.image!)
-              )
-             
-            ,)
-        ),
+              child: Image.file(File(anime.image!)),
+            )),
         Expanded(
             child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(anime.title!, style: const TextStyle(color: Colors.white)),
+              Text(anime.title!, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
               Text("${anime.score}",
                   style: const TextStyle(color: Colors.white)),
+              Text(anime.year.toString(), style: const TextStyle(color: Colors.white)),
             ],
           ),
         )),
