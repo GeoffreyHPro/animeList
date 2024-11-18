@@ -23,7 +23,7 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
   Widget getName() {
     if (widget.anime.title != null) {
       return Text(widget.anime.title!,
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18));
     } else {
       return const Text("no name");
@@ -33,7 +33,7 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
   Widget getScore() {
     if (widget.anime.score != null) {
       return Text(widget.anime.score!.toString(),
-          style: TextStyle(color: Colors.white));
+          style: const TextStyle(color: Colors.white));
     } else {
       return const Text("no score");
     }
@@ -42,7 +42,7 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
   Widget getYear() {
     if (widget.anime.year != null) {
       return Text(widget.anime.year!.toString(),
-          style: TextStyle(color: Colors.white));
+          style: const TextStyle(color: Colors.white));
     } else {
       return const Text("no year");
     }
@@ -51,7 +51,7 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
   Widget getDescription() {
     if (widget.anime.synopsis != null) {
       return Text(widget.anime.synopsis!.toString(),
-          style: TextStyle(color: Colors.white));
+          style: const TextStyle(color: Colors.white));
     } else {
       return const Text("no description");
     }
@@ -130,7 +130,7 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
                   SizedBox(
                     width: MediaQuery.sizeOf(context).width * 0.60,
                     child: TextFormField(
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                       maxLines: null,
                       initialValue: widget.anime.annotation,
                       keyboardType: TextInputType.multiline,
@@ -147,9 +147,9 @@ class _FavAnimeInfoState extends State<FavAnimeInfo> {
                       await updateAnnotation(
                           globals.database, annotation, widget.anime.title!);
                     },
-                    child: const Text("sauvegarder"),
                     style:
                         ElevatedButton.styleFrom(foregroundColor: Colors.black),
+                    child: const Text("sauvegarder"),
                   ),
                   const SizedBox(
                     height: 25,
