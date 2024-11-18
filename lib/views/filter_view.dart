@@ -17,18 +17,11 @@ class FilterView extends StatefulWidget {
 }
 
 class _FilterView extends State<FilterView> {
-  RangeValues scoreValue = RangeValues(filterSearch.scoreMin, filterSearch.scoreMax);
+  RangeValues scoreValue =
+      RangeValues(filterSearch.scoreMin, filterSearch.scoreMax);
   String name = filterSearch.name;
-  String valueType = "all";
-  List<Checked> typeList = [
-    Checked("all", checked: true),
-    Checked("tv", checked: false),
-    Checked("movie", checked: false),
-    Checked("ova", checked: false),
-    Checked("special", checked: false),
-    Checked("ona", checked: false),
-    Checked("music", checked: false)
-  ];
+  String valueType = filterSearch.type;
+  List<Checked> typeList = checkboxes;
   String order = filterSearch.order;
 
   changeValue(score) {
@@ -44,7 +37,10 @@ class _FilterView extends State<FilterView> {
       }
       valueType = typeList[index].name;
       typeList[index].checked = true;
+      
     });
+    filterSearch.types = typeList;
+    print(filterSearch.types[0].checked);
   }
 
   changeOrder(value) {
@@ -108,7 +104,7 @@ class _FilterView extends State<FilterView> {
           FilterItem(
               title: "Name of Anime",
               content: TextField(
-                
+                controller: TextEditingController()..text = filterSearch.name,
                 cursorColor: Colors.black,
                 decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
@@ -117,6 +113,7 @@ class _FilterView extends State<FilterView> {
                         borderSide: BorderSide(color: Colors.black))),
                 onChanged: (value) {
                   name = value.toString();
+                  filterSearch.name = name;
                 },
               )),
           const SizedBox(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projet_tm/services/api/filter.dart';
 
 class CheckBoxWidget extends StatelessWidget {
   final dynamic fct;
-  final List<Checked> valuesList;
+  List<Checked> valuesList = filterSearch.types;
 
-  const CheckBoxWidget(
-      {super.key, required this.fct, required this.valuesList});
+  CheckBoxWidget({super.key, required this.fct, required this.valuesList});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class CheckBoxWidget extends StatelessWidget {
 
 class Checked {
   bool checked;
-  final String name;
+  String name;
 
-  Checked(this.name, {required this.checked});
+  Checked({required this.name, required this.checked});
 }
