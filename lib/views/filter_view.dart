@@ -63,8 +63,19 @@ class _FilterView extends State<FilterView> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
         children: [
+          Center(
+            child: Text(
+              "Filters",
+              textAlign: TextAlign.start,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            ),
+          ),
           const SizedBox(
             height: 15,
+          ),
+          Divider(
+            indent: 15,
+            endIndent: 15,
           ),
           FilterItem(
             title: "Average note",
@@ -76,6 +87,10 @@ class _FilterView extends State<FilterView> {
           const SizedBox(
             height: 15,
           ),
+          Divider(
+            indent: 15,
+            endIndent: 15,
+          ),
           FilterItem(
             title: "Type of Media",
             content: CheckBoxWidget(
@@ -85,6 +100,10 @@ class _FilterView extends State<FilterView> {
           ),
           const SizedBox(
             height: 15,
+          ),
+          Divider(
+            indent: 15,
+            endIndent: 15,
           ),
           FilterItem(
               title: "Name of Anime",
@@ -101,6 +120,10 @@ class _FilterView extends State<FilterView> {
               )),
           const SizedBox(
             height: 15,
+          ),
+          Divider(
+            indent: 15,
+            endIndent: 15,
           ),
           FilterItem(
               title: "Sort order",
@@ -139,11 +162,7 @@ class FilterItem extends StatelessWidget {
   const FilterItem({super.key, required this.title, required this.content});
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(2),
-            color: Color.fromRGBO(41, 37, 44, 0.4)),
+    return SizedBox(
         width: MediaQuery.sizeOf(context).width * 0.8,
         child: Padding(
             padding: const EdgeInsets.all(15.0),
