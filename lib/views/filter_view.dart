@@ -17,8 +17,8 @@ class FilterView extends StatefulWidget {
 }
 
 class _FilterView extends State<FilterView> {
-  RangeValues scoreValue = const RangeValues(0, 10);
-  String name = "";
+  RangeValues scoreValue = RangeValues(filterSearch.scoreMin, filterSearch.scoreMax);
+  String name = filterSearch.name;
   String valueType = "all";
   List<Checked> typeList = [
     Checked("all", checked: true),
@@ -29,7 +29,7 @@ class _FilterView extends State<FilterView> {
     Checked("ona", checked: false),
     Checked("music", checked: false)
   ];
-  String order = "none";
+  String order = filterSearch.order;
 
   changeValue(score) {
     setState(() {
@@ -63,17 +63,17 @@ class _FilterView extends State<FilterView> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
         children: [
-          Center(
+          const Center(
             child: Text(
               "Filters",
               textAlign: TextAlign.start,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
           ),
           const SizedBox(
             height: 15,
           ),
-          Divider(
+          const Divider(
             indent: 15,
             endIndent: 15,
           ),
@@ -87,7 +87,7 @@ class _FilterView extends State<FilterView> {
           const SizedBox(
             height: 15,
           ),
-          Divider(
+          const Divider(
             indent: 15,
             endIndent: 15,
           ),
@@ -101,13 +101,14 @@ class _FilterView extends State<FilterView> {
           const SizedBox(
             height: 15,
           ),
-          Divider(
+          const Divider(
             indent: 15,
             endIndent: 15,
           ),
           FilterItem(
               title: "Name of Anime",
               content: TextField(
+                
                 cursorColor: Colors.black,
                 decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
@@ -121,7 +122,7 @@ class _FilterView extends State<FilterView> {
           const SizedBox(
             height: 15,
           ),
-          Divider(
+          const Divider(
             indent: 15,
             endIndent: 15,
           ),
@@ -129,6 +130,7 @@ class _FilterView extends State<FilterView> {
               title: "Sort order",
               content: Center(
                   child: DropDownWidget(
+                initVal: filterSearch.order,
                 fct: changeOrder,
               ))),
           const SizedBox(
@@ -138,13 +140,14 @@ class _FilterView extends State<FilterView> {
             style: ElevatedButton.styleFrom(foregroundColor: Colors.black),
             child: const Text("Search"),
             onPressed: () {
-              Filter filter = Filter(
+              filterSearch = Filter(
                   name: name,
                   scoreMin: scoreValue.start,
                   scoreMax: scoreValue.end,
                   type: valueType,
                   order: order);
-              BlocProvider.of<AnimeCubit>(context).animesFilter(filter, 1);
+              BlocProvider.of<AnimeCubit>(context)
+                  .animesFilter(filterSearch, 1);
 
               Navigator.pop(context);
             },

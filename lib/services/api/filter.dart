@@ -9,6 +9,8 @@ class Filter {
       {this.name = "",
       this.scoreMin = 0,
       this.scoreMax = 10,
-      this.type = "",
+      this.type = "all",
       this.order = "none"});
 }
+
+Filter filterSearch = Filter();

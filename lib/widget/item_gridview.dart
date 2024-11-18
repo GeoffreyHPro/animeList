@@ -34,8 +34,8 @@ class Item extends StatelessWidget {
           Container(height: MediaQuery.sizeOf(context).height * 0.01),
           Row(
             children: [
-              Expanded(child: SizedBox()),
-              Expanded(child: SizedBox()),
+              const Expanded(child: SizedBox()),
+              const Expanded(child: SizedBox()),
               Expanded(
                 child: CircleAvatar(
                   backgroundColor: Colors.red,

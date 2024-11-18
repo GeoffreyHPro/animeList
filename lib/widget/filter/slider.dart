@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:projet_tm/services/api/filter.dart';
 
 class SliderWidget extends StatelessWidget {
   final dynamic fct;
   final RangeValues currentValue;
+  
 
   const SliderWidget(
       {super.key, required this.fct, required this.currentValue});
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -23,6 +26,8 @@ class SliderWidget extends StatelessWidget {
           ),
           onChanged: (RangeValues value) {
             fct(value);
+            filterSearch.scoreMin = value.start;
+            filterSearch.scoreMax = value.end;
           },
         ),
       ],

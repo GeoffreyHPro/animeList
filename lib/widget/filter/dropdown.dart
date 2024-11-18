@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DropDownWidget extends StatelessWidget {
-  DropDownWidget({super.key, required this.fct});
+  String initVal;
+
+  DropDownWidget({super.key, required this.fct, this.initVal = "none"});
   final dynamic fct;
 
   final List<String> listTri = [
@@ -15,7 +17,7 @@ class DropDownWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu(
-      initialSelection: listTri.first,
+      initialSelection: initVal,
       onSelected: (value) {
         fct(value);
       },
