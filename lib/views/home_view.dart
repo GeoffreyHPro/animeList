@@ -57,6 +57,12 @@ class MyHomePage extends StatelessWidget {
                 )),
           ),
           Expanded(
+            child: Text(
+                "${BlocProvider.of<AnimeCubit>(context).animeData!.pagination.currentPage}/${BlocProvider.of<AnimeCubit>(context).animeData!.pagination.lastPage}",
+                style: TextStyle(color: Colors.white),
+                textAlign: TextAlign.center),
+          ),
+          Expanded(
             child: IconButton(
                 onPressed: () async {
                   BlocProvider.of<AnimeCubit>(context).animesFilter(

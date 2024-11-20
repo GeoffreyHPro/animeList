@@ -20,8 +20,8 @@ class Item extends StatelessWidget {
             ));
       },
       icon: Container(
-        width: MediaQuery.sizeOf(context).width * 0.40,
-        height: MediaQuery.sizeOf(context).height * 0.40,
+        width: MediaQuery.sizeOf(context).width * 0.44,
+        height: MediaQuery.sizeOf(context).height * 0.43,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(11.0),
