@@ -10,8 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => AnimeCubit()),
-      BlocProvider(create: (context) => FavAnimeCubit())],
+      providers: [
+        BlocProvider(create: (context) => AnimeCubit()),
+        BlocProvider(create: (context) => FavAnimeCubit())
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Anime',

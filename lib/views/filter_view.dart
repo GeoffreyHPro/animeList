@@ -17,19 +17,12 @@ class FilterView extends StatefulWidget {
 }
 
 class _FilterView extends State<FilterView> {
-  RangeValues scoreValue = const RangeValues(0, 10);
-  String name = "";
-  String valueType = "tous";
-  List<Checked> typeList = [
-    Checked("tous", checked: true),
-    Checked("tv", checked: false),
-    Checked("movie", checked: false),
-    Checked("ova", checked: false),
-    Checked("special", checked: false),
-    Checked("ona", checked: false),
-    Checked("music", checked: false)
-  ];
-  String order = "aucun";
+  RangeValues scoreValue =
+      RangeValues(filterSearch.scoreMin, filterSearch.scoreMax);
+  String name = filterSearch.name;
+  String valueType = filterSearch.type;
+  List<Checked> typeList = checkboxes;
+  String order = filterSearch.order;
 
   changeValue(score) {
     setState(() {
@@ -44,7 +37,10 @@ class _FilterView extends State<FilterView> {
       }
       valueType = typeList[index].name;
       typeList[index].checked = true;
+      
     });
+    filterSearch.types = typeList;
+    print(filterSearch.types[0].checked);
   }
 
   changeOrder(value) {
@@ -63,11 +59,22 @@ class _FilterView extends State<FilterView> {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
         children: [
+          const Center(
+            child: Text(
+              "Filters",
+              textAlign: TextAlign.start,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            ),
+          ),
           const SizedBox(
             height: 15,
           ),
+          const Divider(
+            indent: 15,
+            endIndent: 15,
+          ),
           FilterItem(
-            title: "Note moyenne",
+            title: "Average note",
             content: SliderWidget(
               fct: (value) => changeValue(value),
               currentValue: scoreValue,
@@ -76,8 +83,12 @@ class _FilterView extends State<FilterView> {
           const SizedBox(
             height: 15,
           ),
+          const Divider(
+            indent: 15,
+            endIndent: 15,
+          ),
           FilterItem(
-            title: "Type de média",
+            title: "Type of Media",
             content: CheckBoxWidget(
               valuesList: typeList,
               fct: changeType,
@@ -86,34 +97,54 @@ class _FilterView extends State<FilterView> {
           const SizedBox(
             height: 15,
           ),
+          const Divider(
+            indent: 15,
+            endIndent: 15,
+          ),
           FilterItem(
-              title: "Nom de l'animé",
+              title: "Name of Anime",
               content: TextField(
+                controller: TextEditingController()..text = filterSearch.name,
+                cursorColor: Colors.black,
+                decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black))),
                 onChanged: (value) {
                   name = value.toString();
+                  filterSearch.name = name;
                 },
               )),
           const SizedBox(
             height: 15,
           ),
+          const Divider(
+            indent: 15,
+            endIndent: 15,
+          ),
           FilterItem(
-              title: "Ordre de tri",
+              title: "Sort order",
               content: Center(
                   child: DropDownWidget(
+                initVal: filterSearch.order,
                 fct: changeOrder,
               ))),
           const SizedBox(
             height: 15,
           ),
           ElevatedButton(
-            child: const Text("rechercher"),
+            style: ElevatedButton.styleFrom(foregroundColor: Colors.black),
+            child: const Text("Search"),
             onPressed: () {
-              Filter filter = Filter(
+              filterSearch = Filter(
                   name: name,
                   scoreMin: scoreValue.start,
                   scoreMax: scoreValue.end,
-                  type: valueType, order: order);
-              BlocProvider.of<AnimeCubit>(context).animesFilter(filter, 1);
+                  type: valueType,
+                  order: order);
+              BlocProvider.of<AnimeCubit>(context)
+                  .animesFilter(filterSearch, 1);
 
               Navigator.pop(context);
             },
@@ -131,12 +162,7 @@ class FilterItem extends StatelessWidget {
   const FilterItem({super.key, required this.title, required this.content});
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(2),
-          color: const Color.fromRGBO(200, 200, 200, 0.4),
-        ),
+    return SizedBox(
         width: MediaQuery.sizeOf(context).width * 0.8,
         child: Padding(
             padding: const EdgeInsets.all(15.0),
